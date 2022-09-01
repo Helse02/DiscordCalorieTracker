@@ -8,6 +8,6 @@ Personalized calorie tracker.<br />
 • Sends a final message at night to notify user whether or not calorie goal was met or not.<br />
 
 Plans to: <br />
-• Store data on user's diet using SQLite
-• Ping user
-• Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.
+• Store data on user's diet using SQLite<br />
+• Ping user<br />
+• Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.<br />
