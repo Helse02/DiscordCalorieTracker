@@ -33,12 +33,12 @@ var totalCalories = 0;
 
 // function getGuild(guildId)
 
-client.once("ready", () => { // when the bot turns on, run the function
+client.once("ready", () => { 
   // Alternatively, you can set the activity to any of the following:
   // PLAYING, STREAMING, LISTENING, WATCHING
   
   client.user.setPresence({
-    activities: [{ name: `Thinh's Calories`, type: Discord.ActivityFlags.WATCHING }]
+    activities: [{ name: `Calories`, type: Discord.ActivityFlags.WATCHING }]
   });
 
   console.log('Ready');
@@ -49,18 +49,18 @@ client.once("ready", () => { // when the bot turns on, run the function
       const embed = new EmbedBuilder()
         .setTitle("WE'RE ALL GONNA MAKE IT. GET YOUR CALORIES IN\n input calories using this format '-500'")
         .setColor("#0099ff")
-        .setImage("https://cdn.discordapp.com/attachments/1014283703876333568/1014335242175254528/unknown.png");
+        .setImage("https://lindyhealth.b-cdn.net/wp-content/uploads/2022/05/zyzz-pose-how-to-iconic.png");
       actualMath.send({embeds: [embed]});
 
   setInterval(() => {
     var dt = new Date();
     if (dt.getHours() == 0 && dt.getMinutes() == 0 && dt.getSeconds() == 0) { //when the time turns 12:00 A.M.
-      var actualMath = client.guilds.cache.find((guild) => guild.id == "738980331562205246").channels.cache.find((channel) => channel.id == "1014283703876333568");
+      var actualMath = client.guilds.cache.find((guild) => guild.id == guildId).channels.cache.find((channel) => channel.id == channelId);
 
       const embed = new EmbedBuilder()
         .setTitle("WE'RE ALL GONNA MAKE IT. GET YOUR CALORIES IN")
         .setColor("#0099ff")
-        .setImage("https://cdn.discordapp.com/attachments/1014283703876333568/1014335242175254528/unknown.png");
+        .setImage("https://lindyhealth.b-cdn.net/wp-content/uploads/2022/05/zyzz-pose-how-to-iconic.png");
       actualMath.send({embeds: [embed]});
     }
 
@@ -68,23 +68,23 @@ client.once("ready", () => { // when the bot turns on, run the function
     .then(channel => {
 
       if (dt.getHours() == 11 && dt.getMinutes() == 0 && dt.getSeconds() == 0) {
-        channel.send("Good Morning Daddy Thinh! Whatd you eat for breakfast today? (Please input data in the format '-500' to input 500 calories");
+        channel.send("Good Morning! Whatd you eat for breakfast today? (Use '-500' to input 500 calories)");
         channel.send(`You are ${totalCalories}/${calorieGoal} calories of the way there!`);
       }
 
       if (dt.getHours() == 15 && dt.getMinutes() == 0 && dt.getSeconds() == 0) {
-        channel.send("Good Afternoon Daddy Thinh! Whatd you eat for lunch today? (Please input data in the format '-500' to input 500 calories");
+        channel.send("Good Afternoon! Whatd you eat for lunch today? (Use '-500' to input 500 calories)");
         channel.send(`You are ${totalCalories}/${calorieGoal} calories of the way there!`);
       }
 
       if (dt.getHours() == 20 && dt.getMinutes() == 0 && dt.getSeconds() == 0) {
-        channel.send("Good Evening Daddy Thinh! Whatd you eat for dinner today? (Please input data in the format '-500' to input 500 calories");
+        channel.send("Good Evening! Whatd you eat for dinner today? (Use '-500' to input 500 calories)");
         channel.send(`You are ${totalCalories}/${calorieGoal} calories of the way there!`);
       }
 
       if (dt.getHours() == 0 && dt.getMinutes() == 0 && dt.getSeconds() == 0) {
         if (totalCalories < calorieGoal) {
-            channel.send("You have failed to reach your calorie goal for the day scrawny ass. No pussy for you tonight");
+            channel.send("You have failed to reach your calorie goal for the day. Try again tomorrow!");
         }
         else {
             channel.send("Congrats! You successfully reached your calorie goal for the day!");
