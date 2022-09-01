@@ -21,6 +21,7 @@ const channelId = config.channel;
 client.login(token);
 var calorieGoal = 2500;
 var totalCalories = 0;
+var foodList = {};
 
 // const guildData = {};
 
@@ -62,6 +63,9 @@ client.once("ready", () => {
         .setColor("#0099ff")
         .setImage("https://lindyhealth.b-cdn.net/wp-content/uploads/2022/05/zyzz-pose-how-to-iconic.png");
       actualMath.send({embeds: [embed]});
+
+      var foodList = {};
+      totalCalories = 0;
     }
 
     client.channels.fetch(channelId)
@@ -106,21 +110,39 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply(`Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}`);
 	} else if (commandName === 'user') {
 		await interaction.reply(`Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}`);
-	}
+	} else if (commandName === 'list') {
+      if (Object.keys(foodList).length === 0) {
+        await interaction.reply(`You havent eaten anything yet!`);
+      } 
+      else {
+        await interaction.reply('Food'.padEnd(48) + 'Calories');
+        //interaction.channel.send('Food'.padEnd(48) + 'Calories');
+        for (var key in foodList) { //54
+          var padding = 54 - key.length;
+          interaction.channel.send(key.padEnd(padding) + foodList[key]);
+        };
+      }
+	  }
 });
 
 client.on('messageCreate', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-  const args = message.content.slice(prefix.length).trim().split(' ');
-  const command = args.shift().toLowerCase();
+  const args = message.content.slice(prefix.length).trim().split('-');
 
-  if (!isNaN(command)) {
-    totalCalories = totalCalories + parseInt(command);
-    message.channel.send(`Great Job! Keep getting your calories in! ${command} calories has been inputed`);
-  } else if (isNaN(command)) {
+  if (!isNaN(args[1])) {
+    totalCalories = totalCalories + parseInt(args[1]);
+    message.channel.send(`Great Job! Keep getting your calories in! ${args[1]} calories has been inputed`);
+    foodList[args[0]] = args[1];
+
+  } else if (isNaN(args[1])) {
      message.channel.send("Please type in a valid response");
   }
+
+  if (totalCalories >= calorieGoal) {
+    message.channel.send("You have successfully reached your calorie goal for the day! Keep getting those calories in!");
+  }
+
 });
 
 function addZero(i) {
