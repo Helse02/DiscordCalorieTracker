@@ -6,8 +6,7 @@ Personalized calorie tracker.<br />
 • Prompts user 3 times a day to enter meal description and calorie count.<br />
 • Allows user to input extra calories through commands to include mid-day snacks.<br />
 • Sends a final message at night to notify user whether or not calorie goal was met or not.<br />
+• Stores user data in SQlite database. Accessibile through commands to view each specific days food and calories.<br />
 
 Plans to: <br />
-• Store data on user's diet using SQLite<br />
-• Ping user<br />
-• Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.<br />
+• Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.<br />s
