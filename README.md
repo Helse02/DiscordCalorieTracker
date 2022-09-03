@@ -9,4 +9,4 @@ Personalized calorie tracker.<br />
 • Stores user data in SQlite database. Accessibile through commands to view each specific days food and calories.<br />
 
 Plans to: <br />
-• Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.<br />s
+• Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.<br />
