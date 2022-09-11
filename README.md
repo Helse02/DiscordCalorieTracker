@@ -8,5 +8,19 @@ Personalized calorie tracker.<br />
 • Sends a final message at night to notify user whether or not calorie goal was met or not.<br />
 • Stores user data in SQlite database. Accessibile through commands to view each specific days food and calories.<br />
 
+## Commands
+- `change_calorie_goal`
+- `change_time`
+- `count`
+- `delete`
+- `get_food_data`
+- `help`
+- `input_food`
+- `list`
+- `meal_times`
+- `notify`
+- `server`
+- `user`
+
 Plans to: <br />
 • Expand to multiple servers using hash maps to store personal data including: guild, channel, and user ids.<br />
