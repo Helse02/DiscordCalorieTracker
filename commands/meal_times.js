@@ -5,6 +5,7 @@ const {
     addZero,
     convert24to12Hour,
     ifAMorPM,
+    timeEmojis,
 } = require("../utilities/functions.js");
 
 module.exports = {
@@ -12,7 +13,6 @@ module.exports = {
         .setName('meal_times')
         .setDescription('Get current meal times'),
     async execute(interaction) {
-        console.log(globals.morningHour, globals.morningMinutes);
 
         var mealTimes = new EmbedBuilder()
             .setColor(0x0099ff)
@@ -23,17 +23,17 @@ module.exports = {
             )
             .setFields({
                 name: "__Breakfast__",
-                value: `${convert24to12Hour(globals.morningHour)}:${addZero(globals.morningMinutes)} ${ifAMorPM(globals.morningHour, globals.morningMinutes, 0)}`,
+                value: `\`${convert24to12Hour(globals.morningHour)}:${addZero(globals.morningMinutes)} ${ifAMorPM(globals.morningHour, globals.morningMinutes, 0)}\` ${timeEmojis(globals.morningHour, globals.morningMinutes)}`,
                 inline: true,
             })
             .addFields({
                 name: "__Lunch__",
-                value: `${convert24to12Hour(globals.afternoonHour)}:${addZero(globals.afternoonMinutes)} ${ifAMorPM(globals.afternoonHour, globals.afternoonMinutes, 0)}`,
+                value: `\`${convert24to12Hour(globals.afternoonHour)}:${addZero(globals.afternoonMinutes)} ${ifAMorPM(globals.afternoonHour, globals.afternoonMinutes, 0)}\` ${timeEmojis(globals.afternoonHour, globals.afternoonMinutes)}`,
                 inline: false,
             })
             .addFields({
                 name: "__Dinner__",
-                value: `${convert24to12Hour(globals.nightHour)}:${addZero(globals.nightMinutes)} ${ifAMorPM(globals.nightHour, globals.nightMinutes, 0)}`,
+                value: `\`${convert24to12Hour(globals.nightHour)}:${addZero(globals.nightMinutes)} ${ifAMorPM(globals.nightHour, globals.nightMinutes, 0)}\` ${timeEmojis(globals.nightHour, globals.nightMinutes)}`,
                 inline: false,
             })
             .setTimestamp()

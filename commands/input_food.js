@@ -25,12 +25,16 @@ module.exports = {
         );
 
         globals.foodList.push({ food: enteredFood, calories: enteredCalories });
-
         var tempDate = new Date().toLocaleString().split(",");
         db.insertFoodTable({
             date: tempDate[0],
             food: enteredFood,
             calories: enteredCalories,
+        });
+
+        db.insertTCalTable({
+            date: tempDate[0],
+            totalCal: globals.calorieGoal
         });
 
         if (globals.totalCalories >= globals.calorieGoal) {

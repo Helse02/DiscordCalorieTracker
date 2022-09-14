@@ -25,7 +25,7 @@ module.exports = {
             var calorieList = new EmbedBuilder()
                 .setColor(0x0099ff)
                 .setTitle("Food List")
-                .setDescription("List of Food & Calories Consumed")
+                .setDescription("List of food & calories consumed")
                 .setThumbnail(
                     "https://cdn.discordapp.com/attachments/1014283703876333568/1015015594229243935/111.png"
                 )

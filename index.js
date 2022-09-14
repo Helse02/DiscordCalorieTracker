@@ -1,11 +1,9 @@
 //------------------------INITIALIZATION-------------------------------------
-
 const Discord = require("discord.js");
 const fs = require("fs");
 const { Client, GatewayIntentBits, ActivityType, Routes } = require("discord.js");
 const { EmbedBuilder } = require("discord.js");
 const { REST } = require('@discordjs/rest');
-
 
 const db = require("./utilities/sql.js");
 const sql = require("sqlite3");
@@ -16,6 +14,7 @@ const { setDefaultResultOrder } = require("dns");
 const { channel } = require("diagnostics_channel");
 
 const globals = require("./utilities/globals.js");
+const { timeEmojis } = require('./utilities/functions.js');
 
 const client = new Client({
   intents: [
@@ -36,8 +35,8 @@ client.login(token);
 
 client.commands = new Discord.Collection();
 
-const files = fs.readdirSync("./commands").filter((file) => file.endsWith(".js")); // reads all js files in the commands directory
-const commands = []; // store commands
+const files = fs.readdirSync("./commands").filter((file) => file.endsWith(".js"));
+const commands = [];
 
 for (const file of files) {
   const command = require(`./commands/${file}`);
@@ -62,7 +61,7 @@ client.once("ready", () => {
 
   const rest = new REST({ version: '10' }).setToken(token);
 
-  rest.put(Routes.applicationGuildCommands(clientID, guildID), { body: commands }) // deploy commands
+  rest.put(Routes.applicationGuildCommands(clientID, guildID), { body: commands })
     .then((data) => console.log(`Successfully registered ${data.length} application commands.`))
     .catch(console.error);
 
@@ -82,6 +81,12 @@ client.once("ready", () => {
   listedChannel.send(
     `The current calorie goal is \`${globals.calorieGoal} cal\`. Would you like to change it?\nUse the slash command \`/change_calorie_goal\` to modify the calorie goal to your desire.`
   );
+
+  var tempDate = new Date().toLocaleString().split(",");
+  db.insertTCalTable({
+    date: tempDate[0],
+    totalCal: globals.calorieGoal
+  });
 
   //------------------------REMINDER/PROMPT FUNCTIONS-------------------------------------
 
@@ -160,6 +165,7 @@ client.on("messageCreate", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).trim().replaceAll(" ", "").split("-");
+  const argsWS = message.content.slice(prefix.length).trim().split("-");
 
   console.log(args);
 });
